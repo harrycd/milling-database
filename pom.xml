@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>uk.ac.cf.milling.vm</groupId>
 	<artifactId>milling-database</artifactId>
-	<version>0.6.4</version>
+	<version>0.7.0</version>
 	<name>Milling Database</name>
 	<description>Persistence layer for communication with sqlite db</description>
 	<build>

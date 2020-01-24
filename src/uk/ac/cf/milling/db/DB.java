@@ -59,6 +59,7 @@ public class DB {
 			statement.executeUpdate("CREATE TABLE IF NOT EXISTS billet ("
 					+ "billetId		INTEGER, "
 					+ "billetName 	TEXT, "
+					+ "billetShape	INTEGER, "
 					+ "materialId	INTEGER, "
 					+ "billetXMin	REAL, "
 					+ "billetXMax	REAL, "
@@ -67,6 +68,13 @@ public class DB {
 					+ "billetZMin	REAL, "
 					+ "billetZMax	REAL, "
 					+ "PRIMARY KEY(billetId) )");
+			statement.executeUpdate("CREATE TABLE IF NOT EXISTS mesh_part ("
+					+ "billetId 			INTEGER 	NOT NULL, "
+					+ "meshPartBilletId		INTEGER		NOT NULL, "
+					+ "PRIMARY KEY(billetId, meshPartBilletId), "
+					+ "FOREIGN KEY(billetId) REFERENCES billet(billetId), "
+					+ "FOREIGN KEY(meshPartBilletId) REFERENCES billet(billetId)) "
+					+ "WITHOUT ROWID");
 			statement.executeUpdate("CREATE TABLE IF NOT EXISTS cutting_tool ("
 					+ "toolId 		INTEGER, "
 					+ "toolName 	TEXT, "
