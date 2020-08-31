@@ -17,6 +17,7 @@ public class CuttingTool {
 	int toolId = 0;
 	String toolName = "";
 	String toolType = "";
+	String toolSeries = "";
 	int toolTeeth = 0;
 	double toolLength = 0; //The total length of the tool (affecting distance from nose to spindle)
 	List<CuttingToolProfile> cuttingToolProfiles = new ArrayList<CuttingToolProfile>();
@@ -117,6 +118,21 @@ public class CuttingTool {
 		this.cuttingToolProfiles = profiles;
 	}
 	
+	/**
+	 * @return the toolSeries
+	 */
+	public String getToolSeries() {
+		return toolSeries;
+	}
+
+	/**
+	 * @param toolSeries the toolSeries to set
+	 */
+	public void setToolSeries(String toolSeries) {
+		this.toolSeries = toolSeries;
+	}
+
+
 	/**
 	 * @return the list of axial profiles sorted ascending based on distance from cutting tool nose
 	 */

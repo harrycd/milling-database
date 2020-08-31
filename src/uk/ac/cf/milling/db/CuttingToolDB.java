@@ -24,16 +24,17 @@ public class CuttingToolDB extends DB{
 	 * @param toolTeeth - number of teeth that the tool has
 	 * @param toolLength - the total length of the tool
 	 */
-	public int addCuttingTool(String toolName, String toolType, int toolTeeth, double toolLength){
+	public int addCuttingTool(String toolName, String toolType, String toolSeries, int toolTeeth, double toolLength){
 		int cuttingToolId = 0;
 		Connection connection = getConnection();
-		String query = "INSERT INTO cutting_tool(toolName, toolType, toolTeeth, toolLength) VALUES(?,?,?,?)";
+		String query = "INSERT INTO cutting_tool(toolName, toolType, toolSeries, toolTeeth, toolLength) VALUES(?,?,?,?,?)";
 		try {
 			PreparedStatement ps = connection.prepareStatement(query);
 			ps.setString(1, toolName);
 			ps.setString(2, toolType);
-			ps.setInt(3, toolTeeth);
-			ps.setDouble(4, toolLength);
+			ps.setString(3, toolSeries);
+			ps.setInt(4, toolTeeth);
+			ps.setDouble(5, toolLength);
 			ps.executeUpdate();
 			
 			ResultSet rs = ps.getGeneratedKeys();
@@ -68,6 +69,7 @@ public class CuttingToolDB extends DB{
 			tool.setToolId(toolId);
 			tool.setToolName(rs.getString("toolName"));
 			tool.setToolType(rs.getString("toolType"));
+			tool.setToolSeries(rs.getString("toolSeries"));
 			tool.setToolTeeth(rs.getInt("toolTeeth"));
 			tool.setToolLength(rs.getDouble("toolLength"));
 			
@@ -97,6 +99,7 @@ public class CuttingToolDB extends DB{
 				tool.setToolId(rs.getInt("toolId"));
 				tool.setToolName(rs.getString("toolName"));
 				tool.setToolType(rs.getString("toolType"));
+				tool.setToolSeries(rs.getString("toolSeries"));
 				tool.setToolTeeth(rs.getInt("toolTeeth"));
 				tool.setToolLength(rs.getDouble("toolLength"));
 				tools.add(tool);
@@ -117,16 +120,17 @@ public class CuttingToolDB extends DB{
 	 * @param toolTeeth - number of teeth that the tool has
 	 * @param toolLength - the total length of the cutting tool
 	 */
-	public void updateCuttingTool(int toolId, String toolName, String toolType, int toolTeeth, double toolLength ) {
+	public void updateCuttingTool(int toolId, String toolName, String toolType, String toolSeries, int toolTeeth, double toolLength ) {
 		Connection connection = getConnection();
-		String query = "UPDATE cutting_tool SET toolName=?, toolType=?, toolTeeth=?, toolLength=? WHERE toolId=?;";
+		String query = "UPDATE cutting_tool SET toolName=?, toolType=?, toolSeries=?, toolTeeth=?, toolLength=? WHERE toolId=?;";
 		try {
 			PreparedStatement ps = connection.prepareStatement(query);
 			ps.setString(1, toolName);
 			ps.setString(2, toolType);
-			ps.setInt(3, toolTeeth);
-			ps.setDouble(4, toolLength);
-			ps.setInt(5, toolId);
+			ps.setString(3, toolSeries);
+			ps.setInt(4, toolTeeth);
+			ps.setDouble(5, toolLength);
+			ps.setInt(6, toolId);
 			ps.executeUpdate();
 			closeConnection(connection);
 		} catch (SQLException e) {

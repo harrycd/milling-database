@@ -36,17 +36,17 @@ public class CarouselDB extends DB {
 	}
 	
 	/**
-	 * @param position - the pocket number of the carousel
+	 * @param pocketNumber - the pocket number of the carousel
 	 * @return the id of the tool loaded in the specified pocket
 	 */
-	public int getCarouselPocketToolId(int position){
+	public int getLoadedCuttingToolId(int pocketNumber){
 		int toolId = 0;
 		Connection connection = getConnection();
 		String query = "SELECT * from carousel WHERE position=?;";
 		try {
 			
 			PreparedStatement ps = connection.prepareStatement(query);
-			ps.setInt(1, position);
+			ps.setInt(1, pocketNumber);
 			
 			ResultSet rs = ps.executeQuery();
 			
@@ -60,6 +60,39 @@ public class CarouselDB extends DB {
 			e.printStackTrace();
 		}
 		return toolId;
+	}
+
+	/**
+	 * @param pocketNumber - the pocket number of the carousel
+	 * @return the cutting tool loaded in the specified pocket
+	 */
+	public CuttingTool getLoadedCuttingTool(int pocketNumber){
+		CuttingTool tool = new CuttingTool();
+		Connection connection = getConnection();
+		String query = "SELECT * from carousel INNER JOIN cutting_tool ON carousel.toolId = cutting_tool.toolId WHERE position=?;";
+		try {
+			
+			PreparedStatement ps = connection.prepareStatement(query);
+			ps.setInt(1, pocketNumber);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			//Parse results
+			if (rs.next()) {
+				tool.setToolId(rs.getInt("toolId"));
+				tool.setToolName(rs.getString("toolName"));
+				tool.setToolType(rs.getString("toolType"));
+				tool.setToolSeries(rs.getString("toolSeries"));
+				tool.setToolTeeth(rs.getInt("toolTeeth"));
+				tool.setToolLength(rs.getDouble("toolLength"));
+			}
+			
+			//Close the connection to the database
+			closeConnection(connection);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return tool;
 	}
 
 	/**
@@ -139,6 +172,7 @@ public class CarouselDB extends DB {
 				tool.setToolId(rs.getInt("toolId"));
 				tool.setToolName(rs.getString("toolName"));
 				tool.setToolType(rs.getString("toolType"));
+				tool.setToolSeries(rs.getString("toolSeries"));
 				tool.setToolTeeth(rs.getInt("toolTeeth"));
 				tools.add(tool);
 			}

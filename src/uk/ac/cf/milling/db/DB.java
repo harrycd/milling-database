@@ -79,6 +79,7 @@ public class DB {
 					+ "toolId 		INTEGER, "
 					+ "toolName 	TEXT, "
 					+ "toolType 	TEXT, "
+					+ "toolSeries 	TEXT, "
 					+ "toolTeeth 	INTEGER, "
 					+ "toolLength 	REAL, "
 					+ "PRIMARY KEY(toolId) )");
@@ -114,9 +115,24 @@ public class DB {
 					+ "monitoringPath	STRING, "
 					+ "billetId	INTEGER, "
 					+ "PRIMARY KEY(ncId))");
+			statement.executeUpdate("CREATE TABLE IF NOT EXISTS learning_set ("
+					+ "learningSetId	INTEGER, "
+					+ "materialId 		INTEGER, "
+					+ "toolSeries		TEXT, "
+					+ "targetName		TEXT, "
+					+ "sampleCounter	INTEGER	DEFAULT 0, "
+					+ "PRIMARY KEY(learningSetId),"
+					+ "FOREIGN KEY(materialId) REFERENCES material(materialId), "
+					+ "FOREIGN KEY(toolSeries) REFERENCES cutting_tool(toolSeries)) ");
+			statement.executeUpdate("CREATE TABLE IF NOT EXISTS learning_input ("
+					+ "learningSetId	INTEGER, "
+					+ "inputName		TEXT, "
+					+ "inputValue		REAL	DEFAULT 1, "
+					+ "PRIMARY KEY(learningSetId, inputName),"
+					+ "FOREIGN KEY(learningSetId) REFERENCES learning_set(materialId))");
 			
 			// Enter required settings for the app to run
-			statement.executeUpdate("INSERT INTO setting(settingId, value) VALUES('elementSize','1'),('timeStep','1')");
+			statement.executeUpdate("INSERT OR IGNORE INTO setting(settingId, value) VALUES('elementSize','1'),('timeStep','1')");
 			
 			closeConnection(connection);
 		} catch (SQLException e) {
