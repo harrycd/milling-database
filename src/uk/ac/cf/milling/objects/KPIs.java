@@ -21,8 +21,9 @@ public class KPIs {
 	private List<CuttingTool> tools; // A list of the tools used during cutting with their properties and usage
 	
 	private String analysisData = ""; //The results of GCode simulation
-	private long[] mrr; // Elements removed per time unit. Index 1 is the MRR for time = timestep
-	private float[] timePoints; // The time points that the analysis file contains information for
+	private long[] mr; // Elements removed.
+	private double[] mrr; // Elements removed per time unit. 
+	private double[] timePoints; // The time points that the analysis file contains information for
 	private double[] toolX; // The x coordinate of the tool at the corresponding timePoint (index matching) 
 	private double[] toolY; // The y coordinate of the tool at the corresponding timePoint (index matching) 
 	private double[] toolZ; // The z coordinate of the tool at the corresponding timePoint (index matching)
@@ -83,16 +84,42 @@ public class KPIs {
 	public void setTimeUnits(String timeUnits) {
 		this.timeUnits = timeUnits;
 	}
+	
+	/**
+	 * @return the timePoints
+	 */
+	public double[] getTimePoints() {
+		return timePoints;
+	}
+	/**
+	 * @param timePoints the timePoints to set
+	 */
+	public void setTimePoints(double[] timePoints) {
+		this.timePoints = timePoints;
+	}
+	/**
+	 * @return the mr
+	 */
+	public long[] getMr() {
+		return mr;
+	}
+	
+	/**
+	 * @param mr the mr to set
+	 */
+	public void setMr(long[] mr) {
+		this.mr = mr;
+	}
 	/**
 	 * @return the mrr
 	 */
-	public long[] getMrr() {
+	public double[] getMrr() {
 		return mrr;
 	}
 	/**
 	 * @param mrr the mrr to set
 	 */
-	public void setMrr(long[] mrr) {
+	public void setMrr(double[] mrr) {
 		this.mrr = mrr;
 	}
 	/**
@@ -106,18 +133,6 @@ public class KPIs {
 	 */
 	public void setPart(boolean[][][] part) {
 		this.part = part;
-	}
-	/**
-	 * @return the timePoints
-	 */
-	public float[] getTimePoints() {
-		return timePoints;
-	}
-	/**
-	 * @param timePoints the timePoints to set
-	 */
-	public void setTimePoints(float[] timePoints) {
-		this.timePoints = timePoints;
 	}
 
 	/**

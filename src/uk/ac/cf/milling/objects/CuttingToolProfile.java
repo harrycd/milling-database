@@ -21,7 +21,7 @@ public class CuttingToolProfile {
 	/**
 	 * @param materialRemoved - Length of machined material to append to this tool profile
 	 */
-	public void appendMaterialRemoved(double materialRemoved){
+	public void addMaterialRemoved(double materialRemoved){
 		this.materialRemoved += materialRemoved;
 	}
 	
