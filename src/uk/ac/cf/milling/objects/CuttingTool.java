@@ -156,6 +156,12 @@ public class CuttingTool {
 	 */
 	@Override
 	public String toString() {
-		return this.getToolName();
+		StringBuffer sb = new StringBuffer();
+		sb.append("\ttoolName : " + toolName);
+		sb.append("\ttoolType : " + toolType);
+		sb.append("\ttoolSeries : " + toolSeries);
+		sb.append("\ttoolTeeth : " + toolTeeth);
+		sb.append("\ttoolLength : " + toolLength);
+		return sb.toString();
 	}
 }
