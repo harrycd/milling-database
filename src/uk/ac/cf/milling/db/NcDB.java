@@ -169,6 +169,26 @@ public class NcDB extends DB{
 
 	/**
 	 * @param ncId - id of numerical control file
+	 * @param ncPath - file path of the numerical control file
+	 * @param billetId - Id of the billet used to produce analysis/monitoring file
+	 */
+	public void updateNcPath(int ncId, String ncPath, int billetId){
+		Connection connection = getConnection();
+		String query = "UPDATE nc SET ncPath=?, billetId=? WHERE ncId=?;";
+		try {
+			PreparedStatement ps = connection.prepareStatement(query);
+			ps.setString(1, ncPath);
+			ps.setInt(2, billetId);
+			ps.setInt(3, ncId);
+			ps.executeUpdate();
+			closeConnection(connection);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * @param ncId - id of numerical control file
 	 * @param analysisPath - file path of the simulator analysis file
 	 * @param billetId - Id of the billet used to produce analysis/monitoring file
 	 */
