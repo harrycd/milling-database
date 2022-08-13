@@ -4,10 +4,9 @@
 package uk.ac.cf.milling.objects;
 
 /**
+ * Holds parameter values for the surface profile of the cutting tool. 
  * @author Theocharis Alexopoulos
- * The surface profile of the tool. 
- * Indicates the distance of each surface element from the centre point at the nose of the tool
- * This reference point is chosen as it is normally the 
+ * 
  */
 public class CuttingToolProfile {
 	int toolId = 0;

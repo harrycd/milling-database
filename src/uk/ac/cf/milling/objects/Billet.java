@@ -10,13 +10,17 @@ import uk.ac.cf.milling.db.BilletDB;
 import uk.ac.cf.milling.db.SettingsDB;
 
 /**
- * @author Theocharis Alexopoulos
  * This is the class to create the initial billet that will be machined in order to create the part
+ * @author Theocharis Alexopoulos
  */
 public class Billet {
+	/** This is reserved for errors where shape is undefined	 */
 	public final static int UNDEFINED = 0;
+	/** A shape that is a combination of other shapes */
 	public final static int COMPLEX = 1;
+	/** Rectangular shape */
 	public final static int RECTANGULAR = 2; 
+	/** Cylindrical shape */
 	public final static int CYLINDRICAL = 3;
 
 	//params held in database
@@ -39,6 +43,7 @@ public class Billet {
 	 * Billet constructor does not generate a mesh therefore part remains null.
 	 * @param billetId - id and primary key for billet entry in the database
 	 * @param billetName - name to show for this billet
+	 * @param billetShape - shape of the billet (rectangle, cylinder, complex)
 	 * @param materialId - id of the material that this billet is made of
 	 * @param xBilletMin - min X coordinate of total billet volume when placed on table
 	 * @param xBilletMax - max X coordinate of total billet volume when placed on table
@@ -65,7 +70,12 @@ public class Billet {
 
 	}
 
-	//Constructor of complex billet from primary billets with mesh
+	/**
+	 * Constructor of a complex billet from primary billets with mesh
+	 * @param billetName - The name of the generated complex billet, different from its elements
+	 * @param primaryBillets - A List of billets to combine and create the complex
+	 * @param materialId - The material of the billet independent of the materials of its elements
+	 */
 	public Billet(String billetName, List<Billet> primaryBillets, int materialId) {
 		this.billetName = billetName;
 		this.billetShape = COMPLEX;
@@ -74,7 +84,9 @@ public class Billet {
 	}
 
 
-	//Constructor for empty billet
+	/**
+	 * Constructor for empty billet
+	 */
 	public Billet() {
 		this.billetId = 0;
 		this.billetName = "";

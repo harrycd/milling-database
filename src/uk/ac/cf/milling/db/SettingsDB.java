@@ -9,9 +9,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * @author Theocharis Alexopoulos
- * Utility class to retrieve or update the settings of the application
+ * Utility class to retrieve or update the settings of the application<br>
  * Add or remove a setting is not allowed as everything is created during database creation
+ * @author Theocharis Alexopoulos
  */
 public class SettingsDB extends DB{
 	/**

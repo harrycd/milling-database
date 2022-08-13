@@ -13,6 +13,7 @@ import java.util.List;
 import uk.ac.cf.milling.objects.CuttingTool;
 
 /**
+ * Contains CRUD methods to manage carousel data in the database
  * @author Theocharis Alexopoulos
  *
  */
@@ -29,9 +30,10 @@ public class CarouselDB extends DB {
 			ps.setInt(1, position);
 			ps.setInt(2, toolId);
 			ps.executeUpdate();
-			closeConnection(connection);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}  finally {
+			closeConnection(connection);
 		}
 	}
 	
@@ -54,10 +56,11 @@ public class CarouselDB extends DB {
 			if (rs.next())
 				toolId = rs.getInt("toolId");
 			
-			//Close the connection to the database
-			closeConnection(connection);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			//Close the connection to the database
+			closeConnection(connection);
 		}
 		return toolId;
 	}
@@ -87,10 +90,10 @@ public class CarouselDB extends DB {
 				tool.setToolLength(rs.getDouble("toolLength"));
 			}
 			
-			//Close the connection to the database
-			closeConnection(connection);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}  finally {
+			closeConnection(connection);
 		}
 		return tool;
 	}
@@ -114,10 +117,10 @@ public class CarouselDB extends DB {
 			if(rs.next())
 				position = rs.getInt("position");
 			
-			//Close the connection to the database
-			closeConnection(connection);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}  finally {
+			closeConnection(connection);
 		}
 		return position;
 	}
@@ -146,10 +149,10 @@ public class CarouselDB extends DB {
 				pockets.add(pocket);
 			}
 			
-			//Close the connection to the database
-			closeConnection(connection);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}  finally {
+			closeConnection(connection);
 		}
 		return pockets;
 	}
@@ -177,10 +180,10 @@ public class CarouselDB extends DB {
 				tools.add(tool);
 			}
 			
-			//Close the connection to the database
-			closeConnection(connection);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}  finally {
+			closeConnection(connection);
 		}
 		
 		return tools;
@@ -199,9 +202,10 @@ public class CarouselDB extends DB {
 			ps.setInt(1, toolId);
 			ps.setInt(2, position);
 			ps.executeUpdate();
-			closeConnection(connection);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}  finally {
+			closeConnection(connection);
 		}
 	}
 	
@@ -215,9 +219,10 @@ public class CarouselDB extends DB {
 			PreparedStatement ps = connection.prepareStatement(query);
 			ps.setInt(1, position);
 			ps.executeUpdate();
-			closeConnection(connection);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}  finally {
+			closeConnection(connection);
 		}
 	}
 }

@@ -13,6 +13,7 @@ import java.util.List;
 import uk.ac.cf.milling.objects.Billet;
 
 /**
+ * Contains CRUD methods to manage billet information kept in the database.
  * @author Theocharis Alexopoulos
  *
  */
@@ -242,8 +243,8 @@ public class BilletDB extends DB {
 	}
 
 	/**
-	 * @param billetId
-	 * @return
+	 * @param billetId - the id of the complex billet
+	 * @return a List containing the billets that were used to build the complex billet.
 	 */
 	public List<Billet> getMeshBillets(int billetId) {
 		List<Billet> billets = new ArrayList<Billet>();

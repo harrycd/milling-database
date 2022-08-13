@@ -4,6 +4,7 @@
 package uk.ac.cf.milling.objects;
 
 /**
+ * Holds the parameter values for NC files and the generated analysis files or reports.
  * @author Theocharis Alexopoulos
  *
  */

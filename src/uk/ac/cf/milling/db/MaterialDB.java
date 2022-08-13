@@ -13,6 +13,7 @@ import java.util.List;
 import uk.ac.cf.milling.objects.Material;
 
 /**
+ * Contains CRUD methods to manage materials in the database
  * @author Theocharis Alexopoulos
  *
  */
@@ -46,7 +47,7 @@ public class MaterialDB extends DB {
 	
 	/**
 	 * @param materialId - The id of the material to retrieve
-	 * @return
+	 * @return The retrieved material.
 	 */
 	public Material getMaterial(int materialId){
 		Material material = new Material();

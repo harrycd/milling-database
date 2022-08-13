@@ -13,6 +13,7 @@ import java.util.List;
 import uk.ac.cf.milling.objects.CuttingTool;
 
 /**
+ * Contains CRUD methods to manage cutting tools in the database
  * @author Theocharis Alexopoulos
  *
  */
@@ -21,8 +22,10 @@ public class CuttingToolDB extends DB{
 	/**
 	 * @param toolName - description for the tool
 	 * @param toolType - type of tool (endmill, ball nose etc.)
+	 * @param toolSeries - the series of the tool as stated by the manufacturer.
 	 * @param toolTeeth - number of teeth that the tool has
 	 * @param toolLength - the total length of the tool
+	 * @return the id of the newly created CuttingTool
 	 */
 	public int addCuttingTool(String toolName, String toolType, String toolSeries, int toolTeeth, double toolLength){
 		int cuttingToolId = 0;
@@ -42,9 +45,10 @@ public class CuttingToolDB extends DB{
 				cuttingToolId = rs.getInt(1);
 			}
 			
-			closeConnection(connection);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			closeConnection(connection);
 		}
 		return cuttingToolId;
 	}
@@ -73,16 +77,18 @@ public class CuttingToolDB extends DB{
 			tool.setToolTeeth(rs.getInt("toolTeeth"));
 			tool.setToolLength(rs.getDouble("toolLength"));
 			
-			//Close the connection to the database
-			closeConnection(connection);
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}  finally {
+			//Close the connection to the database regardless of errors
+			closeConnection(connection);
 		}
 		return tool;
 	}
 
 	/**
-	 * @return a List<CuttinTool> containing all tools in database
+	 * @return a List containing all tools in database
 	 */
 	public List<CuttingTool> getAllCuttingTools(){
 		List<CuttingTool> tools = new ArrayList<CuttingTool>();
@@ -105,10 +111,11 @@ public class CuttingToolDB extends DB{
 				tools.add(tool);
 			}
 			
-			//Close the connection to the database
-			closeConnection(connection);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}  finally {
+			//Close the connection to the database regardless of errors
+			closeConnection(connection);
 		}
 		return tools;
 	}
@@ -117,6 +124,7 @@ public class CuttingToolDB extends DB{
 	 * @param toolId - the id of the tool to update
 	 * @param toolName - description for the tool
 	 * @param toolType - type of tool (endmill, ball nose etc.)
+	 * @param toolSeries - the series of the tool as stated by the manufacturer.
 	 * @param toolTeeth - number of teeth that the tool has
 	 * @param toolLength - the total length of the cutting tool
 	 */
@@ -132,9 +140,11 @@ public class CuttingToolDB extends DB{
 			ps.setDouble(5, toolLength);
 			ps.setInt(6, toolId);
 			ps.executeUpdate();
-			closeConnection(connection);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}  finally {
+			//Close the connection to the database regardless of errors
+			closeConnection(connection);
 		}
 	}
 	
@@ -148,9 +158,11 @@ public class CuttingToolDB extends DB{
 			PreparedStatement ps = connection.prepareStatement(query);
 			ps.setInt(1, toolId);
 			ps.executeUpdate();
-			closeConnection(connection);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}  finally {
+			//Close the connection to the database regardless of errors
+			closeConnection(connection);
 		}
 	}
 }

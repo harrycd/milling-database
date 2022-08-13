@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
+ * Holds all information related to a cutting tool and contains methods related<br>
+ * to cutting tool management and manipulation
  * @author Theocharis Alexopoulos
  *
  */
@@ -22,8 +24,13 @@ public class CuttingTool {
 	double toolLength = 0; //The total length of the tool (affecting distance from nose to spindle)
 	List<CuttingToolProfile> cuttingToolProfiles = new ArrayList<CuttingToolProfile>();
 	
+	/**	Simplified end mill tool represented by a cylinder */
 	public static String END_MILL = "End Mill";
+	
+	/** Simplified shape of ball nose tool represented by a cylinder ending to a part of a sphere. */
 	public static String BALL_NOSE_MILL = "Ball Nose Mill";
+	
+	/** Simplified version of a slot mill represented by a cylinder at the height of the slot cutter. */
 	public static String SLOT_MILL = "Slot Mill";
 	
 	
@@ -112,7 +119,7 @@ public class CuttingTool {
 	}
 
 	/**
-	 * @param profile the cuttingToolProfile to set
+	 * @param profiles - the cuttingToolProfile to set
 	 */
 	public void setProfiles(List<CuttingToolProfile> profiles) {
 		this.cuttingToolProfiles = profiles;

@@ -7,8 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Holds the parameter values for the trained model.
  * @author Theocharis Alexopoulos
- * @date 27 Aug 2020
  *
  */
 public class LearningSet {

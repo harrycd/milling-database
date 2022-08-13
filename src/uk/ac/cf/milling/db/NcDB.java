@@ -13,6 +13,7 @@ import java.util.List;
 import uk.ac.cf.milling.objects.Nc;
 
 /**
+ * Contains CRUD methods to manage NC files in the database
  * @author Theocharis Alexopoulos
  *
  */
@@ -80,7 +81,7 @@ public class NcDB extends DB{
 	}
 
 	/**
-	 * @param ncId - id of numerical control file
+	 * @param ncPath - file path of numerical control file
 	 * @return the Nc object specified by the id
 	 */
 	public Nc getNc(String ncPath){

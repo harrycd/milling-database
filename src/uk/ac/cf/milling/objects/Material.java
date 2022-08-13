@@ -4,6 +4,7 @@
 package uk.ac.cf.milling.objects;
 
 /**
+ * Holds the parameter values for billet materials.
  * @author Theocharis Alexopoulos
  *
  */

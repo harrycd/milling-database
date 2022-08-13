@@ -1,6 +1,3 @@
-/**
- * 
- */
 package uk.ac.cf.milling.db;
 
 import java.sql.Connection;
@@ -13,12 +10,16 @@ import java.util.Map;
 import uk.ac.cf.milling.objects.LearningSet;
 
 /**
+ * Contains CRUD methods to manage machine learning models in the database
  * @author Theocharis Alexopoulos
- * @date 24 Aug 2020
- *
+ * 
  */
 public class LearningSetDB extends DB {
 
+	/**
+	 * @param learningSet - Add the created LearningSet into the database
+	 * @return Returns the id of the newly created LearningSet
+	 */
 	public int addLearningSet(LearningSet learningSet) {
 
 		int learningSetId = 0;
@@ -55,6 +56,10 @@ public class LearningSetDB extends DB {
 		return learningSetId;
 	}
 
+	/**
+	 * @param learningSetId - The id of the learning set to retrieve
+	 * @return The retieved learning set
+	 */
 	public LearningSet getLearningSet(int learningSetId) {
 		LearningSet learningSet = new LearningSet();
 		Connection connection = getConnection();
@@ -95,6 +100,12 @@ public class LearningSetDB extends DB {
 
 	}
 	
+	/**
+	 * @param materialId - Material Id of the LearningSet to retrieve
+	 * @param toolSeries - Series of the tool related to the LearningSet to retrieve
+	 * @param targetName - Target parameter of the LearningSet to retrieve
+	 * @return Returns the retrieved LearningSet
+	 */
 	public LearningSet getLearningSet(int materialId, String toolSeries, String targetName) {
 		LearningSet learningSet = new LearningSet();
 		Connection connection = getConnection();
@@ -120,6 +131,10 @@ public class LearningSetDB extends DB {
 
 	}
 
+	/**
+	 * Uses the id of the provided LearningSet to find the previous version of LearningSet in the database and update it.
+	 * @param learningSet - The version of the LearningSet to update the database with. 
+	 */
 	public void updateLearningSet(LearningSet learningSet) {
 		Connection connection = getConnection();
 		try {
@@ -160,6 +175,9 @@ public class LearningSetDB extends DB {
 		}
 	}
 
+	/**
+	 * @param learningSetId - The ID of the LearningSet to delete
+	 */
 	public void deleteLearningSet(int learningSetId) {
 		Connection connection = getConnection();
 		try {

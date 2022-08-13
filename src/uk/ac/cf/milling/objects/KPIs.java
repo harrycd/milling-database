@@ -7,6 +7,8 @@ import java.util.List;
 
 
 /**
+ * Holds values for virtual process KPIs and temporary stores simulation run <br>
+ * information that is required to do the simulation and report results.
  * @author Theocharis Alexopoulos
  *
  */

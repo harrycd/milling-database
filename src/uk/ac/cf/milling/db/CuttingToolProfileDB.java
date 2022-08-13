@@ -13,6 +13,7 @@ import java.util.List;
 import uk.ac.cf.milling.objects.CuttingToolProfile;
 
 /**
+ * Contains CRUD methods to manage cutting tool profiles files in the database
  * @author Theocharis Alexopoulos
  *
  */
@@ -23,7 +24,7 @@ public class CuttingToolProfileDB extends DB{
 	 * @param toolId - the tool that the profile refers to
 	 * @param distanceFromNose - [mm] distance from the nose of the tool
 	 * @param distanceFromCentre - [mm] distance from the axial centre of the tool
-	 * @param insertionsPerTool - number of times that each tooth penetrated the material
+	 * @param insertionsPerTooth - number of times that each tooth penetrated the material
 	 * @param materialRemoved - [mm] length of travel in the material
 	 * @param axialProfile - true if the profile can get axial usage. false if not
 	 * @param radialProfile - true if the profile can get radial usage. false if not
@@ -42,9 +43,10 @@ public class CuttingToolProfileDB extends DB{
 			ps.setBoolean(7, radialProfile);
 			
 			ps.executeUpdate();
-			closeConnection(connection);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			closeConnection(connection);
 		}
 	}
 	
@@ -66,9 +68,10 @@ public class CuttingToolProfileDB extends DB{
 				ps.setBoolean(7, profile.isRadialProfile());
 				ps.executeUpdate();
 			}
-			closeConnection(connection);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			closeConnection(connection);
 		}
 	}
 	
@@ -101,19 +104,19 @@ public class CuttingToolProfileDB extends DB{
 			profile.setAxialProfile(rs.getBoolean("axialProfile"));
 			profile.setRadialProfile(rs.getBoolean("radialProfile"));
 			
-			//Close the connection to the database
-			closeConnection(connection);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			closeConnection(connection);
 		}
 		return profile;
 	}
 	
 	/**
-	 * @param toolId - tool to return the profiles for
-	 * @param axialProfile - true for axial profile, false for radial
+	 * @param toolId - the id of the tool to return the profiles for
 	 * @param axialProfile - true if the profile can get axial usage. false if not
 	 * @param radialProfile - true if the profile can get radial usage. false if not
+	 * @return the list of profiles for the specified tool
 	 */
 	//TODO sort based on radial or axial profile
 	public List<CuttingToolProfile> getCuttingToolProfiles(int toolId, boolean axialProfile, boolean radialProfile){
@@ -146,11 +149,10 @@ public class CuttingToolProfileDB extends DB{
 				profiles.add(profile);
 			}
 			
-			//Close the connection to the database
-			closeConnection(connection);
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			closeConnection(connection);
 		}
 		
 		return profiles;
@@ -184,11 +186,10 @@ public class CuttingToolProfileDB extends DB{
 				profiles.add(profile);
 			}
 			
-			//Close the connection to the database
-			closeConnection(connection);
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			closeConnection(connection);
 		}
 		
 		return profiles;
@@ -198,7 +199,7 @@ public class CuttingToolProfileDB extends DB{
 	 * @param toolId - the tool that the profile refers to
 	 * @param distanceFromNose - distance from the nose of the cutting tool
 	 * @param distanceFromCentre - local radius of the tool
-	 * @param insertionsPerTool - number of times that each tooth penetrated the material
+	 * @param insertionsPerTooth - number of times that each tooth penetrated the material
 	 * @param materialRemoved - length of travel in the material
 	 */
 	public void updateCuttingToolProfile(int toolId, double distanceFromNose, double distanceFromCentre, int insertionsPerTooth, double materialRemoved){
@@ -212,9 +213,10 @@ public class CuttingToolProfileDB extends DB{
 			ps.setDouble(4, distanceFromNose);
 			ps.setDouble(5, distanceFromCentre);
 			ps.executeUpdate();
-			closeConnection(connection);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			closeConnection(connection);
 		}
 	}
 	
@@ -234,9 +236,10 @@ public class CuttingToolProfileDB extends DB{
 				ps.setDouble(5, profile.getDistanceFromCentre());
 				ps.executeUpdate();
 			}
-			closeConnection(connection);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			closeConnection(connection);
 		}
 	}
 
@@ -253,9 +256,10 @@ public class CuttingToolProfileDB extends DB{
 			ps.setInt(1, toolId);
 			ps.setDouble(2, distanceFromNose);
 			ps.executeUpdate();
-			closeConnection(connection);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			closeConnection(connection);
 		}
 	}
 	
@@ -269,9 +273,10 @@ public class CuttingToolProfileDB extends DB{
 			PreparedStatement ps = connection.prepareStatement(query);
 			ps.setInt(1, toolId);
 			ps.executeUpdate();
-			closeConnection(connection);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			closeConnection(connection);
 		}
 	}
 }

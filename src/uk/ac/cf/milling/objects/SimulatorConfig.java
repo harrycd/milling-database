@@ -6,6 +6,8 @@ package uk.ac.cf.milling.objects;
 import uk.ac.cf.milling.objects.Billet;
 
 /**
+ * Contains simulator configuration parameters and corresponding getter<br>
+ * and setter methods.
  * @author Theocharis Alexopoulos
  *
  */

@@ -11,6 +11,7 @@ import java.sql.Statement;
 import uk.ac.cf.milling.objects.SettingsSingleton;
 
 /**
+ * Basic class for connecting and initialising the database. Must be inherited by all other DB classes.
  * @author Theocharis Alexopoulos
  *
  */
@@ -46,7 +47,10 @@ public class DB {
 	}
 
 	/**
+	 */
+	/**
 	 * Creates an empty db
+	 * @param dbFilePath - The path of the database file that should be created.
 	 */
 	public void initialiseDB(String dbFilePath){
 		//Store the database path at the settings
