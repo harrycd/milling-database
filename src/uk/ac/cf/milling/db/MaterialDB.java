@@ -38,9 +38,10 @@ public class MaterialDB extends DB {
 				materialId = rs.getInt(1);
 			}
 			
-			closeConnection(connection);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			closeConnection(connection);
 		}
 		return materialId;
 	}
@@ -63,12 +64,14 @@ public class MaterialDB extends DB {
 			//Parse results
 			rs.next();
 			material.setMaterialId(materialId);
+			material.setMaterialName(rs.getString("materialName"));
 			material.setTorqueFactor(rs.getDouble("torqueFactor"));
 			
 			//Close the connection to the database
-			closeConnection(connection);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			closeConnection(connection);
 		}
 		return material;
 	}
@@ -94,10 +97,10 @@ public class MaterialDB extends DB {
 				materials.add(material);
 			}
 			
-			//Close the connection to the database
-			closeConnection(connection);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			closeConnection(connection);
 		}
 		return materials;
 	}
@@ -116,9 +119,10 @@ public class MaterialDB extends DB {
 			ps.setDouble(2, torqueFactor);
 			ps.setInt(3, materialId);
 			ps.executeUpdate();
-			closeConnection(connection);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			closeConnection(connection);
 		}
 	}
 	
@@ -132,9 +136,11 @@ public class MaterialDB extends DB {
 			PreparedStatement ps = connection.prepareStatement(query);
 			ps.setInt(1, materialId);
 			ps.executeUpdate();
-			closeConnection(connection);
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			closeConnection(connection);
 		}
 	}
 }

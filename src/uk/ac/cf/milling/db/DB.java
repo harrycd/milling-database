@@ -119,21 +119,17 @@ public class DB {
 					+ "monitoringPath	STRING, "
 					+ "billetId	INTEGER, "
 					+ "PRIMARY KEY(ncId))");
-			statement.executeUpdate("CREATE TABLE IF NOT EXISTS learning_set ("
-					+ "learningSetId	INTEGER, "
+			statement.executeUpdate("CREATE TABLE IF NOT EXISTS ml_model ("
+					+ "mlModelId		INTEGER, "
 					+ "materialId 		INTEGER, "
 					+ "toolSeries		TEXT, "
+					+ "inputNames		TEXT,"
 					+ "targetName		TEXT, "
+					+ "mlModelPath		TEXT, "
 					+ "sampleCounter	INTEGER	DEFAULT 0, "
-					+ "PRIMARY KEY(learningSetId),"
+					+ "PRIMARY KEY(mlModelId),"
 					+ "FOREIGN KEY(materialId) REFERENCES material(materialId), "
 					+ "FOREIGN KEY(toolSeries) REFERENCES cutting_tool(toolSeries)) ");
-			statement.executeUpdate("CREATE TABLE IF NOT EXISTS learning_input ("
-					+ "learningSetId	INTEGER, "
-					+ "inputName		TEXT, "
-					+ "inputValue		REAL	DEFAULT 1, "
-					+ "PRIMARY KEY(learningSetId, inputName),"
-					+ "FOREIGN KEY(learningSetId) REFERENCES learning_set(materialId))");
 			
 			// Enter required settings for the app to run
 			statement.executeUpdate("INSERT OR IGNORE INTO setting(settingId, value) VALUES('elementSize','1'),('timeStep','1')");
